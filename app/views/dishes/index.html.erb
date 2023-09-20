@@ -1,0 +1,50 @@
+<h2>Блюда</h2>
+<%= form_tag import_dishes_path, :multipart => true do %>
+    <%= file_field_tag "file", accept: ".yml" %>
+    <%= submit_tag "Импортировать YML", class: "btn" %>
+<% end %>
+<br>
+<%= link_to 'Новое блюдо', new_dish_path, class: "btn_text_only green_color"%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Состав</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dishes.each do |dish| %>
+      <tr>
+        <td><%= dish.name %></td>
+        <td><%= dish.ingredients %></td>
+        <td>
+          <%= link_to 'Удалить', 
+                  dish,
+                  class: 'btn_text_only',
+                  data: { turbo_method: :delete, turbo_confirm: 'Вы уверены?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Ингредиенты</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Свойства</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ingredients.each do |ingredient| %>
+      <tr>
+        <td><%= ingredient.name %></td>
+        <td><%= ingredient.properties %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,17 @@
+<%= form_tag dishes_path, class: 'form-style' do %>
+  <h1>Новое блюдо</h1>
+  <ul>
+    <li>
+      <%= label_tag :name, 'Название блюда'%>
+      <%= text_field_tag :name, nil, required: true %>
+    </li>
+    <li>
+      <%= label_tag :ingredients, 'Состав'%>
+      <% @ingredients.each do |ingredient| %>
+        <%= check_box_tag 'ingredients[]', ingredient.name %>
+        <%= h ingredient.name %>
+      <% end %>
+    </li>
+  </ul>
+  <%= submit_tag "Создать", class: "btn" %>
+<% end %>

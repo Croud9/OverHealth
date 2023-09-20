@@ -1,0 +1,44 @@
+<h2>Заказы</h2>
+<br>
+<%= link_to 'Отправить на кухню', export_orders_path(format: :json), class: "btn_text_only green_color"%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Клиент</th>
+      <th>Набор</th>
+      <th>Противопоказаны</th>
+      <th>Время заказа</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.client_name %></td>
+
+        <td>
+        <% if order.food_set %>
+          <% order.food_set.each do |food| %>
+            <%= food %>
+          <% end %>
+        <% end %>
+        </td>
+        <td>
+        <% if order.banned_ingredients %>
+          <% order.banned_ingredients.each do |ingredient| %>
+            <%= ingredient %>
+          <% end %>
+        <% end %>
+        </td>
+        <td><%= order.created_at %></td>
+        <td>
+          <%= link_to 'Удалить', 
+                  order,
+                  class: 'btn_text_only',
+                  data: { turbo_method: :delete, turbo_confirm: 'Вы уверены?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

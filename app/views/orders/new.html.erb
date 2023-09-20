@@ -1,0 +1,17 @@
+<%= form_tag orders_path, model: @order , class: 'form-style' do %>
+  <h1>Новый заказ</h1>
+  <ul>
+    <li>
+      <%= label_tag :client_name, 'Ваше имя'%>
+      <%= text_field_tag :client_name %>
+    </li>
+    <li>
+      <%= label_tag :banned_ingredients, 'Исключить ингрединеты'%>
+      <% @ingredients.each do |ingredient| %>
+        <%= check_box_tag 'banned_ingredients[]', ingredient.name %>
+        <%= h ingredient.name %>
+      <% end %>
+    </li>
+  </ul>
+  <%= submit_tag "Создать", class: "btn" %>
+<% end %>
