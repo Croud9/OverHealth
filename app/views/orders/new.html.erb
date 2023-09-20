@@ -6,7 +6,7 @@
       <%= text_field_tag :client_name %>
     </li>
     <li>
-      <%= label_tag :banned_ingredients, 'Исключить ингрединеты'%>
+      <%= label_tag :banned_ingredients, 'Исключить ингредиенты'%>
       <% @ingredients.each do |ingredient| %>
         <%= check_box_tag 'banned_ingredients[]', ingredient.name %>
         <%= h ingredient.name %>
