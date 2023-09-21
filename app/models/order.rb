@@ -2,14 +2,8 @@ class Order < ApplicationRecord
 
   def self.food_set_generate params
     food_set = []
-    if params['banned_ingredients']
-      Dish.all.each do |dish|
-        food_set << dish.name if (params['banned_ingredients'] & dish.ingredients).empty? 
-      end
-    else
-      Dish.all.each do |dish|
-        food_set << dish.name 
-      end
+    Dish.all.each do |dish|
+      food_set << dish.name if !params['banned_ingredients'] || (params['banned_ingredients'] & dish.ingredients).empty?
     end
     food_set
   end
@@ -18,11 +12,9 @@ class Order < ApplicationRecord
     output = []
     dishes = Hash.new(0) 
 
-    Order.all.each do |order|
-      order.food_set.each { | v | dishes.store(v, dishes[v]+1) }
-    end 
+    Order.all.each { |order| order.food_set.each { | v | dishes.store(v, dishes[v] + 1) } }
 
-    dishes.sort{|a, b| b.last <=> a.last }.each do |name, count|
+    dishes.sort{ |a, b| b.last <=> a.last }.each do |name, count|
       output << { 
         name: name, 
         count: count 
@@ -30,6 +22,5 @@ class Order < ApplicationRecord
     end
 
     output.to_json
-
   end
 end

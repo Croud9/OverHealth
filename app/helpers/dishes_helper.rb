@@ -2,7 +2,6 @@ module DishesHelper
   require 'yaml'
   
   def self.import_yml file
-    
     begin
       dishes = []
       ingredients = []
@@ -11,15 +10,11 @@ module DishesHelper
       data_file['dishes'].each do |dish|
         dishes << {
           name: dish['name'],
-          ingredients: dish['ingredients'],
+          ingredients: dish['ingredients']
         }
       end
 
-      data_file['ingredients'].each do |name|
-        ingredients << {
-          name: name,
-        }
-      end
+      data_file['ingredients'].each { |name| ingredients << { name: name } }
 
       { dishes: dishes, ingredients: ingredients }
     rescue

@@ -5,13 +5,15 @@
       <%= label_tag :name, 'Название блюда'%>
       <%= text_field_tag :name, nil, required: true %>
     </li>
-    <li>
-      <%= label_tag :ingredients, 'Состав'%>
-      <% @ingredients.each do |ingredient| %>
+    <%= label_tag :ingredients, 'Состав', class: 'label_gray'%>
+    <% @ingredients.each do |ingredient| %>
+      <label class="checkbox-btn green_checked">
         <%= check_box_tag 'ingredients[]', ingredient.name %>
-        <%= h ingredient.name %>
-      <% end %>
-    </li>
+        <span><%= ingredient.name %></span>
+      </label>
+    <% end %>
+    <br>
+    <br>
+    <%= submit_tag "Создать", class: "btn" %>
   </ul>
-  <%= submit_tag "Создать", class: "btn" %>
 <% end %>
