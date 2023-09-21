@@ -1,13 +1,5 @@
 class Order < ApplicationRecord
-
-  def self.food_set_generate params
-    food_set = []
-    Dish.all.each do |dish|
-      food_set << dish.name if !params['banned_ingredients'] || (params['banned_ingredients'] & dish.ingredients).empty?
-    end
-    food_set
-  end
-
+  
   def self.to_json
     output = []
     dishes = Hash.new(0) 
@@ -20,7 +12,6 @@ class Order < ApplicationRecord
         count: count 
       }
     end
-
     output.to_json
   end
 end

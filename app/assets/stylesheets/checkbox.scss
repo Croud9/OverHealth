@@ -22,25 +22,26 @@
 }
  
 .red_checked input[type=checkbox]:checked + span{
-	background: #ffb3a6;
+	background: #fb816c;
+  color: #fff;
+  border: 1px solid #fb816c;
 }
 
 .green_checked input[type=checkbox]:checked + span{
-	background: #9ae79a;
+	background: #00be3fd5;
+  color: #fff;
+  border: 1px solid #00be3fd5;
 }
 
-/* Hover */
 .checkbox-btn:hover {
 	color: #666;
 }
  
-/* Active */
 .checkbox-btn input[type=checkbox]:active:not(:disabled) + span {
 	background: #d2c5ac;
 	color: #000;
 }
  
-/* Disabled */
 .checkbox-btn input[type=checkbox]:disabled + span {
 	background: #efefef;
 	color: #666;

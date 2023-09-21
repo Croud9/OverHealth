@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    food_set = Order.food_set_generate(params)
+    food_set = OrdersHelper.food_set_generate(params)
     @order = Order.new(client_name: params['client_name'], banned_ingredients: params['banned_ingredients'], food_set: food_set)
     if @order.save
       redirect_to new_order_path, notice: 'Заказ успешно создан'
@@ -27,12 +27,7 @@ class OrdersController < ApplicationController
 
   def export
     respond_to do |format|
-      format.json do
-        output = Order.to_json()
-        send_data output,
-          type: :json,
-          disposition: 'inline'
-      end
+      format.json { render json: Order.to_json() }
     end
   end
 end

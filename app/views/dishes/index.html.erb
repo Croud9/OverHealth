@@ -18,7 +18,7 @@
     <% @dishes.each do |dish| %>
       <tr>
         <td><%= dish.name %></td>
-        <td><%= dish.ingredients %></td>
+        <td><%= dish.ingredients.join(', ').capitalize if dish.ingredients %></td>
         <td>
           <%= link_to 'Удалить', 
                   dish,

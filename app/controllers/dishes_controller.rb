@@ -11,10 +11,10 @@ class DishesController < ApplicationController
   
   def create 
     dish = Dish.new(name: params[:name], ingredients: params[:ingredients])
-    if dish.save && params[:ingredients]
+    if params[:ingredients] && dish.save
       redirect_to dishes_path, notice: 'Блюдо успешно создано'
     else
-      flash.now[:success] = "Блюдо не создано"
+      flash.now[:success] = "Укажите состав блюда"
       render turbo_stream: turbo_stream.replace("flash_notice", partial: "layouts/flash", locals: { flash: flash })
     end
   end
